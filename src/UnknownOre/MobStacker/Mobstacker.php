@@ -8,6 +8,7 @@ use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
+use slapper\entities\SlapperEntity;
 
 class Mobstacker{
 
@@ -75,9 +76,8 @@ class Mobstacker{
     public function findNearStack(int $range = 12): ?Living{
         $entity = $this->entity;
         if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
-        $boundingBox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
-        foreach ($entity->getLevel()->getCollidingEntities($boundingBox) as $e) {
-            if (!$e instanceof Player) {
+        foreach ($entity->getLevel()->getNearbyEntities($entity->getBoundingBox()->expandedCopy($range, $range, $range)) as $e) {
+            if (!$e instanceof Player and !$e instanceof SlapperEntity) {
                 if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
                     $ae = new Mobstacker($e);
                     if ($ae->isStacked() and !$this->isStacked()) return $e;
