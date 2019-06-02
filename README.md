@@ -1,4 +1,4 @@
-###**What is MobStacker?**
+### What is MobStacker?
 <l>MobStacker is a super simple but highly effective plugin designed to reduce lag both for the server and clients.
 
 *It works off the premise that lowering the number of entities in the area (Mobs, in this case), by stacking them all together, means less information for the server to keep track of, and also less entities for each client near the mobs to render.
