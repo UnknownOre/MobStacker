@@ -12,7 +12,10 @@ use pocketmine\Player;
 
 class EventHandler implements Listener{
 
-    public function onDeath(EntityDamageByEntityEvent $event){
+    /**
+     * @param EntityDamageByEntityEvent $event
+     */
+    public function onDeath(EntityDamageByEntityEvent $event): void{
         $entity = $event->getEntity();
         if(!$entity instanceof Living or $entity instanceof Player) return;
         $mobstacker = new Mobstacker($entity);
@@ -20,7 +23,10 @@ class EventHandler implements Listener{
         if($mobstacker->removeStack()) $event->setCancelled(true);
     }
 
-    public function onSpawn(EntitySpawnEvent $event){
+    /**
+     * @param EntitySpawnEvent $event
+     */
+    public function onSpawn(EntitySpawnEvent $event): void{
         $entity = $event->getEntity();
         if($entity instanceof Player or !$entity instanceof Living) return;
         $mobstacker = new Mobstacker($entity);
