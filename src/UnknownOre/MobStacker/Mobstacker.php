@@ -36,6 +36,7 @@ class Mobstacker{
         if(($mob = $this->findNearStack()) == null){
             $nbt = new IntTag('stack',1);
             $this->entity->namedtag->setTag($nbt);
+            $mobstack = $this;
         }else{
             $this->entity->flagForDespawn();
             $mobstack = new Mobstacker($mob);
