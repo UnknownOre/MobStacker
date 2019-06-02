@@ -77,7 +77,7 @@ class Mobstacker{
         $entity = $this->entity;
         if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
         foreach ($entity->getLevel()->getNearbyEntities($entity->getBoundingBox()->expandedCopy($range, $range, $range)) as $e) {
-            if (!$e instanceof Player and !$e instanceof SlapperEntity) {
+            if (!$e instanceof Player and !$e instanceof SlapperEntity and $e instanceof Living) {
                 if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
                     $ae = new Mobstacker($e);
                     if ($ae->isStacked() and !$this->isStacked()) return $e;
