@@ -23,6 +23,7 @@ class EventHandler implements Listener{
         if(!$mobstacker->isStacked()) return;
         if($mobstacker->removeStack()) $event->setCancelled(true);
     }
+    
     /**
      * @param EntitySpawnEvent $event
      */
