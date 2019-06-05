@@ -13,22 +13,12 @@ class EventHandler implements Listener{
     /**
      * @param EntityDamageByEntityEvent $event
      */
-    public function onDamage(EntityDamageByEntityEvent $event): void{
+    public function onDamage(EntityDamageEvent $event): void{
         $entity = $event->getEntity();
         if(!$entity instanceof Living or $entity instanceof Player) return;
         $mobstacker = new Mobstacker($entity);
         if(!$mobstacker->isStacked()) return;
         if($mobstacker->removeStack()) $event->setCancelled(true);
-    }
-
-    /**
-     * @param EntityDeathEvent $event
-     */
-    public function onDeath(EntityDeathEvent $event): void{
-        $entity = $event->getEntity();
-        if(!$entity instanceof Living or $entity instanceof Player) return;
-        $mobstacker = new Mobstacker($entity);
-        if(!$mobstacker->isStacked()) $event->setCancelled(true);
     }
     /**
      * @param EntitySpawnEvent $event
