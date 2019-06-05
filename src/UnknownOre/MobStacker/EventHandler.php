@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
+
 namespace UnknownOre\MobStacker;
+
 use pocketmine\entity\Living;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDeathEvent;
@@ -8,6 +10,7 @@ use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\Player;
 use slapper\entities\SlapperEntity;
+
 class EventHandler implements Listener{
     
     /**
