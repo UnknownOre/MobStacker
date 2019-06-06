@@ -13,11 +13,11 @@ use slapper\entities\SlapperEntity;
 class EventHandler implements Listener{
     
     /**
-     * @param EntityDamageByEntityEvent $event
+     * @param EntityDamageEvent $event
      */
     public function onDamage(EntityDamageEvent $event): void{
         $entity = $event->getEntity();
-        if(!$entity instanceof Living or $entity instanceof Player) return;
+        if(!$entity instanceof Living or $entity instanceof Player or $entity instanceof SlapperEntity) return;
         $mobstacker = new Mobstacker($entity);
         if($mobstacker->removeStack()) $event->setCancelled(true);
     }
