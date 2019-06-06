@@ -34,6 +34,10 @@ class Mobstacker{
     }
 
     public function Stack(): void{
+        if($this->isStacked()){
+            $this->updateNameTag();
+            return;
+        }
         if(($mob = $this->findNearStack()) == null){
             $nbt = new IntTag('stack',1);
             $this->entity->namedtag->setTag($nbt);
@@ -58,14 +62,12 @@ class Mobstacker{
     public function removeStack(): bool{
         $entity = $this->entity;
         $nbt = $entity->namedtag;
-        if(!$this->isStacked() or ($c = $nbt->getInt('stack')) <= 1) return false;
+        if(!$this->isStacked() or ($c = $this->getStackAmount() <= 1)) return false;
         $nbt->setInt('stack',$c - 1);
         $event = new EntityDeathEvent($entity, $drops = $entity->getDrops());
         $event->call();
         $this->updateNameTag();
-        foreach($drops as $drop){
-            $entity->getLevel()->dropItem($entity->getPosition(),$drop);
-        }
+        foreach($drops as $drop) $entity->getLevel()->dropItem($entity->getPosition(),$drop);
         return true;
     }
 
