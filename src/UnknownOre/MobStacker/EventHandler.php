@@ -19,7 +19,6 @@ class EventHandler implements Listener{
         $entity = $event->getEntity();
         if(!$entity instanceof Living or $entity instanceof Player) return;
         $mobstacker = new Mobstacker($entity);
-        if(!$mobstacker->isStacked()) return;
         if($mobstacker->removeStack()) $event->setCancelled(true);
     }
     
