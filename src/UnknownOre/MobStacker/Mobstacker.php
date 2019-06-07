@@ -62,7 +62,7 @@ class Mobstacker{
     public function removeStack(): bool{
         $entity = $this->entity;
         $nbt = $entity->namedtag;
-        if(!$this->isStacked() or ($c = $this->getStackAmount() <= 1)) return false;
+        if(!$this->isStacked() or ($c = $this->getStackAmount()) <= 1) return false;
         $nbt->setInt('stack',$c - 1);
         $event = new EntityDeathEvent($entity, $drops = $entity->getDrops());
         $event->call();
