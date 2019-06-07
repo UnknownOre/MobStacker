@@ -9,13 +9,16 @@ use pocketmine\nbt\tag\IntTag;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
 use slapper\entities\SlapperEntity;
+use slapper\entities\SlapperHuman;
 
 class Mobstacker{
+    
     /* @var Living */
     private $entity;
     
+    /** @var string  */
     CONST STACK = 'stack';
-
+    
     /**
      * Mobstacker constructor.
      * @param Living $entity
@@ -23,20 +26,21 @@ class Mobstacker{
     public function __construct(Living $entity){
         $this->entity = $entity;
     }
-    
+
     /**
      * @return int
      */
     public function getStackAmount(): int{
         return $this->entity->namedtag->getInt(self::STACK);
     }
-    
+
     /**
      * @return bool
      */
     public function isStacked(): bool{
         return $this->entity->namedtag->hasTag(self::STACK);
     }
+    
     public function Stack(): void{
         if($this->isStacked()){
             $this->updateNameTag();
@@ -54,11 +58,13 @@ class Mobstacker{
         }
         $mobstack->updateNameTag();
     }
+    
     public function updateNameTag(): void{
         $nbt = $this->entity->namedtag;
         $this->entity->setNameTagAlwaysVisible(True);
         $this->entity->setNameTag(C::BLUE.'x'.C::YELLOW.$nbt->getInt(self::STACK).' '.C::YELLOW.$this->entity->getName());
     }
+    
     /**
      * @return bool
      */
@@ -73,6 +79,7 @@ class Mobstacker{
         foreach($drops as $drop) $entity->getLevel()->dropItem($entity->getPosition(),$drop);
         return true;
     }
+    
     /**
      * @param int $range
      * @return Living|null
@@ -80,11 +87,14 @@ class Mobstacker{
     public function findNearStack(int $range = 12): ?Living{
         $entity = $this->entity;
         if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
-        foreach ($entity->getLevel()->getNearbyEntities($entity->getBoundingBox()->expandedCopy($range, $range, $range)) as $e) {
-            if (!$e instanceof Player and !$e instanceof SlapperEntity and $e instanceof Living) {
-                if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
-                    $ae = new Mobstacker($e);
-                    if ($ae->isStacked() and !$this->isStacked()) return $e;
+        $boundingbox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
+        foreach ($entity->getLevel()->getNearbyEntities($boundingbox) as $e) {
+            if (!$e instanceof Player and $e instanceof Living){
+                if(!$e instanceof SlapperEntity and !$e instanceof SlapperHuman) {
+                    if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
+                        $ae = new Mobstacker($e);
+                        if ($ae->isStacked() and !$this->isStacked()) return $e;
+                    }
                 }
             }
         }
