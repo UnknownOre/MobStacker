@@ -1,4 +1,4 @@
-### What is MobStacker? [![](https://poggit.pmmp.io/shield.state/MobStacker)](https://poggit.pmmp.io/p/MobStacker)<a href="https://discord.gg/gKUGcw" alt="Discord server"/></a>
+### What is MobStacker? [![](https://poggit.pmmp.io/shield.state/MobStacker)](https://poggit.pmmp.io/p/MobStacker)<iframe src="https://discordapp.com/widget?id=577268599165550592&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
 MobStacker is a super simple but highly effective plugin designed to reduce lag both for the server and clients.
 
 It works off the premise that lowering the number of entities in the area (Mobs, in this case), by stacking them all together, means less information for the server to keep track of, and also less entities for each client near the mobs to render.
