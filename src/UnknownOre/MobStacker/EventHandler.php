@@ -9,6 +9,7 @@ use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
 use pocketmine\Player;
 use slapper\entities\SlapperEntity;
+use slapper\entities\SlapperHuman;
 
 class EventHandler implements Listener{
     
@@ -17,7 +18,8 @@ class EventHandler implements Listener{
      */
     public function onDamage(EntityDamageEvent $event): void{
         $entity = $event->getEntity();
-        if(!$entity instanceof Living or $entity instanceof Player or $entity instanceof SlapperEntity) return;
+        if($entity instanceof SlapperEntity or $entity instanceof SlapperHuman) return;
+        if(!$entity instanceof Living or $entity instanceof Player) return;
         $mobstacker = new Mobstacker($entity);
         if($mobstacker->removeStack()) $event->setCancelled(true);
     }
@@ -27,7 +29,8 @@ class EventHandler implements Listener{
      */
     public function onSpawn(EntitySpawnEvent $event): void{
         $entity = $event->getEntity();
-        if($entity instanceof Player or !$entity instanceof Living or $entity instanceof SlapperEntity) return;
+        if($entity instanceof SlapperEntity or $entity instanceof SlapperHuman) return;
+        if($entity instanceof Player or !$entity instanceof Living) return;
         $mobstacker = new Mobstacker($entity);
         $mobstacker->Stack();
     }
