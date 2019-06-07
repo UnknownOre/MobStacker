@@ -51,7 +51,6 @@ class Mobstacker{
     }
 
     public function updateNameTag(): void{
-        if($e instanceof SlapperEntity) return;
         $nbt = $this->entity->namedtag;
         $this->entity->setNameTagAlwaysVisible(True);
         $this->entity->setNameTag(C::BLUE.'x'.C::YELLOW.$nbt->getInt("stack").' '.C::YELLOW.$this->entity->getName());
