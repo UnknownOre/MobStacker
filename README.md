@@ -11,4 +11,5 @@ This plugin is a must have for servers that have mob grinding as a core componen
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.```
+ of this license document, but changing it is not allowed.
+ ```
