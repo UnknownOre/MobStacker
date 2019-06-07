@@ -10,17 +10,6 @@ use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
 use slapper\entities\SlapperEntity;
 
-<?php
-
-
-namespace UnknownCore\Manager;
-
-use pocketmine\entity\Living;
-use pocketmine\event\entity\EntityDeathEvent;
-use pocketmine\nbt\tag\IntTag;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat as C;
-
 class Mobstacker{
     /* @var Living */
     private $entity;
