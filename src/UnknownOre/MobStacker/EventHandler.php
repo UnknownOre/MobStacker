@@ -11,6 +11,9 @@ use pocketmine\Player;
 use slapper\entities\SlapperEntity;
 use slapper\entities\SlapperHuman;
 
+//Minion Fix
+use CLADevs\Minion\minion\Minion;
+
 class EventHandler implements Listener{
     
     /**
@@ -31,6 +34,7 @@ class EventHandler implements Listener{
         $entity = $event->getEntity();
         if($entity instanceof SlapperEntity or $entity instanceof SlapperHuman) return;
         if($entity instanceof Player or !$entity instanceof Living) return;
+        if($entity instanceof Minion) return;
         $mobstacker = new Mobstacker($entity);
         $mobstacker->Stack();
     }
