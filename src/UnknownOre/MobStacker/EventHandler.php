@@ -10,8 +10,6 @@ use pocketmine\event\Listener;
 use pocketmine\Player;
 use slapper\entities\SlapperEntity;
 use slapper\entities\SlapperHuman;
-
-//Minion Fix
 use CLADevs\Minion\minion\Minion;
 
 class EventHandler implements Listener{
