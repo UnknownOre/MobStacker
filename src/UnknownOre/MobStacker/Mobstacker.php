@@ -3,13 +3,18 @@ declare(strict_types=1);
 
 namespace UnknownOre\MobStacker;
 
-use pocketmine\server;
+use pocketmine\Server;
+
 use pocketmine\world\World;
 use pocketmine\entity\Living;
-use pocketmine\event\entity\EntityDeathEvent;
+
 use pocketmine\nbt\tag\IntTag;
+
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat as C;
+
+use pocketmine\event\entity\EntityDeathEvent;
+
 use slapper\entities\SlapperEntity;
 use slapper\entities\SlapperHuman;
 
