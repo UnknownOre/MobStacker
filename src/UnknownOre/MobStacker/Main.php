@@ -7,7 +7,7 @@ namespace UnknownOre\MobStacker;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase{
-    public function onEnable(){
+    public function onEnable() : void{
     $this->getServer()->getPluginManager()->registerEvents(new EventHandler(),$this);
     }
 }
