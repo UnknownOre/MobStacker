@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace UnknownOre\MobStacker;
 
+use pocketmine\server;
+use pocketmine\world\World;
 use pocketmine\entity\Living;
 use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\nbt\tag\IntTag;
@@ -76,7 +78,7 @@ class Mobstacker{
         $event = new EntityDeathEvent($entity, $drops = $entity->getDrops());
         $event->call();
         $this->updateNameTag();
-        foreach($drops as $drop) $entity->getLevel()->dropItem($entity->getPosition(),$drop);
+        foreach($drops as $drop) $entity->getWorld()->dropItem($entity->getPosition(),$drop);
         return true;
     }
     
