@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace UnknownOre\MobStacker;
 
-use pocketmine\Server;
-
 use pocketmine\world\World;
 use pocketmine\entity\Living;
 
