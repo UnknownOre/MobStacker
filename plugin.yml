@@ -1,7 +1,7 @@
 name: MobStacker
 main: UnknownOre\MobStacker\Main
 version: 0.2.3
-api: 3.8.1
+api: 4.0.0
 load: POSTWORLD
 author: UnknownOre
 description: a super simple but highly effective plugin designed to reduce lag both for the server and clients.
