@@ -7,10 +7,9 @@ use pocketmine\entity\Living;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\Listener;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use slapper\entities\SlapperEntity;
 use slapper\entities\SlapperHuman;
-use CLADevs\Minion\minion\Minion;
 
 class EventHandler implements Listener{
     
@@ -22,7 +21,7 @@ class EventHandler implements Listener{
         if($entity instanceof SlapperEntity or $entity instanceof SlapperHuman) return;
         if(!$entity instanceof Living or $entity instanceof Player) return;
         $mobstacker = new Mobstacker($entity);
-        if($mobstacker->removeStack()) $event->setCancelled(true);
+        if($mobstacker->removeStack()) $event->cancel();
     }
     
     /**
@@ -32,7 +31,6 @@ class EventHandler implements Listener{
         $entity = $event->getEntity();
         if($entity instanceof SlapperEntity or $entity instanceof SlapperHuman) return;
         if($entity instanceof Player or !$entity instanceof Living) return;
-        if($entity instanceof Minion) return;
         $mobstacker = new Mobstacker($entity);
         $mobstacker->Stack();
     }

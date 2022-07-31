@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 namespace UnknownOre\MobStacker;
 
+use pocketmine\world\World;
 use pocketmine\entity\Living;
-use pocketmine\event\entity\EntityDeathEvent;
+
 use pocketmine\nbt\tag\IntTag;
-use pocketmine\Player;
+
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat as C;
+
+use pocketmine\event\entity\EntityDeathEvent;
+
 use slapper\entities\SlapperEntity;
 use slapper\entities\SlapperHuman;
 
@@ -76,7 +81,7 @@ class Mobstacker{
         $event = new EntityDeathEvent($entity, $drops = $entity->getDrops());
         $event->call();
         $this->updateNameTag();
-        foreach($drops as $drop) $entity->getLevel()->dropItem($entity->getPosition(),$drop);
+        foreach($drops as $drop) $entity->getWorld()->dropItem($entity->getPosition(),$drop);
         return true;
     }
     
@@ -88,7 +93,7 @@ class Mobstacker{
         $entity = $this->entity;
         if ($entity->isFlaggedForDespawn() or $entity->isClosed()) return null;
         $boundingbox = $entity->getBoundingBox()->expandedCopy($range, $range, $range);
-        foreach ($entity->getLevel()->getNearbyEntities($boundingbox) as $e) {
+        foreach ($entity->getWorld()->getNearbyEntities($boundingbox) as $e) {
             if (!$e instanceof Player and $e instanceof Living){
                 if(!$e instanceof SlapperEntity and !$e instanceof SlapperHuman) {
                     if ($e->distance($entity) <= $range and $e->getName() == $entity->getName()) {
